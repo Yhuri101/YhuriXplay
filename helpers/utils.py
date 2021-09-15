@@ -10,7 +10,7 @@ from youtube_dl.utils import ExtractorError
 
 def raw_converter(dl, song, video):
     return subprocess.Popen(
-        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '50', '-pix_fmt', 'yuv360p', '-vf', 'scale=708:398', video, '-y'],
+        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '50', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
         stdin=None,
         stdout=None,
         stderr=None,
@@ -33,7 +33,7 @@ async def leave_call(chat_id: int):
 
 def youtube(url: str):
     try:
-        params = {"format": "best[height=?360]/best", "noplaylist": True}
+        params = {"format": "best[height=?480]/best", "noplaylist": True}
         yt = YoutubeDL(params)
         info = yt.extract_info(url, download=False)
         return info['url'], info['title'], info['duration']
