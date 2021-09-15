@@ -40,7 +40,7 @@ def convert_seconds(seconds: int) -> str:
 
 def raw_converter(dl, song, video):
     return subprocess.Popen(
-        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '48000', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
+        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
         stdin=None,
         stdout=None,
         stderr=None,
@@ -126,7 +126,7 @@ async def startvideo(client, m: Message):
                     InputAudioStream(
                         audio_file,
                         AudioParameters(
-                            bitrate=48000,
+                            bitrate=44100,
                         ),
                     ),
                     InputVideoStream(
@@ -153,7 +153,7 @@ async def startvideo(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = m.chat.id
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 48000 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -165,7 +165,7 @@ async def startvideo(client, m: Message):
                 InputAudioStream(
                     audio_file,
                     AudioParameters(
-                        bitrate=48000,
+                        bitrate=44100,
                     ),
                 ),
                 InputVideoStream(
@@ -254,7 +254,7 @@ async def chstream(client, m: Message):
                     InputAudioStream(
                         audio_file,
                         AudioParameters(
-                            bitrate=48000,
+                            bitrate=44100,
                         ),
                     ),
                     InputVideoStream(
@@ -277,7 +277,7 @@ async def chstream(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = Veez.CHANNEL
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 48000 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -289,7 +289,7 @@ async def chstream(client, m: Message):
                 InputAudioStream(
                     audio_file,
                     AudioParameters(
-                        bitrate=48000,
+                        bitrate=44100,
                     ),
                 ),
                 InputVideoStream(
