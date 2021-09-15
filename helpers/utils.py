@@ -10,7 +10,7 @@ from youtube_dl.utils import ExtractorError
 
 def raw_converter(dl, song, video):
     return subprocess.Popen(
-        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '48000', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
+        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
         stdin=None,
         stdout=None,
         stderr=None,
