@@ -40,7 +40,7 @@ def convert_seconds(seconds: int) -> str:
 
 def raw_converter(dl, song, video):
     return subprocess.Popen(
-        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '50', '-pix_fmt', 'yuv360p', '-vf', 'scale=708:398', video, '-y'],
+        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '50', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
         stdin=None,
         stdout=None,
         stderr=None,
@@ -63,7 +63,7 @@ async def leave_call(chat_id: int):
 
 def youtube(url: str):
     try:
-        params = {"format": "best[height=?360]/best", "noplaylist": True}
+        params = {"format": "best[height=?480]/best", "noplaylist": True}
         yt = YoutubeDL(params)
         info = yt.extract_info(url, download=False)
         return info['url'], info['title'], info['duration']
@@ -132,8 +132,8 @@ async def startvideo(client, m: Message):
                     InputVideoStream(
                         video_file,
                         VideoParameters(
-                            width=708,
-                            height=398,
+                            width=854,
+                            height=480,
                             frame_rate=50,
                         ),
                     ),
@@ -142,7 +142,7 @@ async def startvideo(client, m: Message):
                 await m.reply_photo(
                     photo="https://telegra.ph/file/c5e60822153157fa082fa.jpg",
                     reply_markup=keyboard,
-                    caption=f" **video streaming started!**\n\n🏷 **Name:** {title}\n⏱ **Duration:** `{convert_seconds(duration)} m`\n\n» **join to video chat on the top to watch the video.**")
+                    caption=f"💡 **video streaming started!**\n\n🏷 **Name:** {title}\n⏱ **Duration:** `{convert_seconds(duration)} m`\n\n» **join to video chat on the top to watch the video.**")
                 return await msg.delete()
                 await idle()
             except Exception as e:
@@ -153,7 +153,7 @@ async def startvideo(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = m.chat.id
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 50 -pix_fmt yuv360p -vf scale=598:336 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 50 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -171,8 +171,8 @@ async def startvideo(client, m: Message):
                 InputVideoStream(
                     video_file,
                     VideoParameters(
-                        width=598,
-                        height=366,
+                        width=640,
+                        height=360,
                         frame_rate=50,
                     ),
                 ),
@@ -187,7 +187,7 @@ async def startvideo(client, m: Message):
             await msg.edit(f"🚫 **error** | `{e}`")
             await idle()
     else:
-        await m.reply(" please reply to video or video file to stream")
+        await m.reply("💭 please reply to video or video file to stream")
 
 
 @Client.on_message(command(["vstop", f"vstop@{Veez.BOT_USERNAME}"]) & filters.group & ~filters.edited)
@@ -260,8 +260,8 @@ async def chstream(client, m: Message):
                     InputVideoStream(
                         video_file,
                         VideoParameters(
-                            width=598,
-                            height=336,
+                            width=854,
+                            height=480,
                             frame_rate=50,
                         ),
                     ),
@@ -277,7 +277,7 @@ async def chstream(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = Veez.CHANNEL
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 50 -pix_fmt yuv360p -vf scale=598:336 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 50 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -295,8 +295,8 @@ async def chstream(client, m: Message):
                 InputVideoStream(
                     video_file,
                     VideoParameters(
-                        width=598,
-                        height=336,
+                        width=640,
+                        height=360,
                         frame_rate=50,
                     ),
                 ),
