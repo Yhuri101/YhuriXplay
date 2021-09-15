@@ -18,7 +18,7 @@ async def entergroup(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>💡 promote me as admin first to do that !</b>",
+            "<b> promote me as admin first to do that !</b>",
         )
         return
 

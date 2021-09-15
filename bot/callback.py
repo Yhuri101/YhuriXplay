@@ -20,11 +20,11 @@ async def cbguide(_, query: CallbackQuery):
 
 📝 **note: stream & stop command can only be executed by group admin only!**
 
-⚡ __Maintained by Veez Project Team__""",
+__Maintained by Yhuri Project__""",
         reply_markup=InlineKeyboardMarkup(
             [[
                 InlineKeyboardButton(
-                    "🏡 Go Back", callback_data="cbstart")
+                    " Go Back", callback_data="cbstart")
             ]]
         ))
 
@@ -32,29 +32,29 @@ async def cbguide(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbstart"))
 async def cbstart(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"✨ **Hello there, I am a telegram group video streaming bot.**\n\n💭 **I was created to stream videos in group "
-        f"video chats easily.**\n\n❔ **To find out how to use me, please press the help button below** 👇🏻",
+        f" **Hello there, I am a telegram group video streaming bot.**\n\n **I was created to stream videos in group "
+        f"video chats easily.**\n\n **To find out how to use me, please press the help button below** ",
         reply_markup=InlineKeyboardMarkup(
             [[
                 InlineKeyboardButton(
                     "➕ Add me to your Group ➕", url=f"https://t.me/{Veez.BOT_USERNAME}?startgroup=true")
             ], [
                 InlineKeyboardButton(
-                    "❔ HOW TO USE THIS BOT", callback_data="cbguide")
+                    " HOW TO USE THIS BOT", callback_data="cbguide")
             ], [
                 InlineKeyboardButton(
-                    "🌐 Terms & Condition", callback_data="cbinfo")
+                    " Terms & Condition", callback_data="cbinfo")
             ], [
                 InlineKeyboardButton(
-                    "💬 Group", url="https://t.me/VeezSupportGroup"),
+                    " Group", url="https://t.me/YhurimusicbotGC"),
                 InlineKeyboardButton(
-                    "📣 Channel", url="https://t.me/levinachannel")
+                    " Channel", url="https://t.me/Yhurimusicchannel")
             ], [
                 InlineKeyboardButton(
-                    "👩🏻‍💻 Developer", url="https://t.me/dlwrml")
+                    " Developer", url="https://t.me/jfhoto")
             ], [
                 InlineKeyboardButton(
-                    "📚 All Command List", callback_data="cblist")
+                    " All Command List", callback_data="cblist")
             ]]
         ))
 
@@ -62,26 +62,18 @@ async def cbstart(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbinfo"))
 async def cbinfo(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""🌐 **bot information !**
+        f""" **bot information !**
 
-🤖 __This bot was created to stream video in telegram group video chats using several methods from WebRTC.__
+__This bot was created to stream video in telegram group video chats using several methods from WebRTC.__
 
-💡 __Powered by PyTgcalls the Async client API for the Telegram Group Calls, and Pyrogram the telegram MTProto API 
+__Powered by PyTgcalls the Async client API for the Telegram Group Calls, and Pyrogram the telegram MTProto API 
 Client Library and Framework in Pure Python for Users and Bots.__
-
-👨🏻‍💻 __Thanks to the developers who participated in the development of this bot, the list of devs can be seen below:__
-
-👩🏻‍✈️ » [Levina Shavila](https://github.com/levina-lab)
-🤵🏻 » [Sammy-XD](https://github.com/Sammy-XD)
-🤵🏻 » [Zxce3](https://github.com/Zxce3)
-🤵🏻 » [Tofik Denianto](https://github.com/tofikdn)
-🤵🏻 » [Shohih Abdul](https://github.com/DoellBarr)
 
 __This bot licensed under GNU-GPL 3.0 License__""",
         reply_markup=InlineKeyboardMarkup(
             [[
                 InlineKeyboardButton(
-                    "🏡 Go Back", callback_data="cbstart")
+                    " Go Back", callback_data="cbstart")
             ]]
         ),
         disable_web_page_preview=True
@@ -91,7 +83,7 @@ __This bot licensed under GNU-GPL 3.0 License__""",
 @Client.on_callback_query(filters.regex("cblist"))
 async def cblist(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""📚 All Command List:
+        f""" All Command List:
 
 » /vplay (reply to video or yt/live url) - to stream video
 » /vstop - stop the video streaming
@@ -100,14 +92,6 @@ async def cblist(_, query: CallbackQuery):
 » /lyric (song name) - lyric scrapper
 » /vjoin - invite assistant join to your group
 » /vleave - order assistant leave from your group
-
-🎊 FUN CMD:
-
-» /asupan - check it by yourself
-» /chika - check it by yourself
-» /wibu - check it by yourself
-» /truth - check it by yourself
-» /dare - check it by yourself
 
 🔰 EXTRA CMD:
 
@@ -123,11 +107,11 @@ async def cblist(_, query: CallbackQuery):
 » /rmw - remove all downloaded raw files
 » /leaveall - order assistant leave from all group
 
-⚡ __Maintained by Veez Project Team__""",
+__Maintained by Yhuri Project__""",
         reply_markup=InlineKeyboardMarkup(
             [[
                 InlineKeyboardButton(
-                    "🏡 Go Back", callback_data="cbstart")
+                    " Go Back", callback_data="cbstart")
             ]]
         ))
 
