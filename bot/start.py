@@ -37,43 +37,43 @@ async def _human_time_duration(seconds):
 async def start(_, m: Message):
     if m.chat.type == "private":
         await m.reply_text(
-            f" **Hello there, I am a telegram group video streaming bot.**\n\n **I was created to stream videos in group "
-            f"video chats easily.**\n\n **To find out how to use me, please press the help button below** ",
+            f"✨ **Hello there, I am a telegram group video streaming bot.**\n\n💭 **I was created to stream videos in group "
+            f"video chats easily.**\n\n❔ **To find out how to use me, please press the help button below** 👇🏻",
             reply_markup=InlineKeyboardMarkup(
                 [[
                     InlineKeyboardButton(
                         "➕ Add me to your Group ➕", url=f"https://t.me/{Veez.BOT_USERNAME}?startgroup=true")
                 ], [
                     InlineKeyboardButton(
-                        " HOW TO USE THIS BOT", callback_data="cbguide")
+                        "❔ HOW TO USE THIS BOT", callback_data="cbguide")
                 ], [
                     InlineKeyboardButton(
-                        " Terms & Condition", callback_data="cbinfo")
+                        "🌐 Terms & Condition", callback_data="cbinfo")
                 ], [
                     InlineKeyboardButton(
-                        " Group", url="https://t.me/YhurimusicbotGC"),
+                        "💬 Group", url="https://t.me/VeezSupportGroup"),
                     InlineKeyboardButton(
-                        " Channel", url="https://t.me/Yhurimusicchannel")
+                        "📣 Channel", url="https://t.me/levinachannel")
                 ], [
                     InlineKeyboardButton(
-                        " Owner", url="https://t.me/jfhoto")
+                        "👩🏻‍💻 Developer", url="https://t.me/dlwrml")
                 ], [
                     InlineKeyboardButton(
-                        " All Command List", callback_data="cblist")
+                        "📚 All Command List", callback_data="cblist")
                 ]]
             ))
     else:
-        await m.reply_text("** bot is online now **",
+        await m.reply_text("**✨ bot is online now ✨**",
                            reply_markup=InlineKeyboardMarkup(
                                [[
                                    InlineKeyboardButton(
-                                       " HOW TO USE THIS BOT", callback_data="cbguide")
+                                       "❔ HOW TO USE THIS BOT", callback_data="cbguide")
                                ], [
                                    InlineKeyboardButton(
-                                       " Search Youtube", switch_inline_query='')
+                                       "🌐 Search Youtube", switch_inline_query='')
                                ], [
                                    InlineKeyboardButton(
-                                       " Command List", callback_data="cblist")
+                                       "📚 Command List", callback_data="cblist")
                                ]]
                            )
                            )
@@ -90,10 +90,10 @@ async def alive(_, m: Message):
             [
                 [
                     InlineKeyboardButton(
-                        " Group", url=f"https://t.me/YhurimusicbotGC"
+                        "✨ Group", url=f"https://t.me/VeezSupportGroup"
                     ),
                     InlineKeyboardButton(
-                        " Channel", url=f"https://t.me/Yhurimusicchannel"
+                        "📣 Channel", url=f"https://t.me/levinachannel"
                     )
                 ]
             ]
@@ -107,8 +107,8 @@ async def ping_pong(_, m: Message):
     m_reply = await m.reply_text("pinging...")
     delta_ping = time() - sturt
     await m_reply.edit_text(
-        " `PONG!!`\n"
-        f" `{delta_ping * 1000:.3f} ms`"
+        "🏓 `PONG!!`\n"
+        f"⚡️ `{delta_ping * 1000:.3f} ms`"
     )
 
 

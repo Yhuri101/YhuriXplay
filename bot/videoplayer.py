@@ -40,7 +40,7 @@ def convert_seconds(seconds: int) -> str:
 
 def raw_converter(dl, song, video):
     return subprocess.Popen(
-        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '44100', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv360p', '-vf', 'scale=640:360', video, '-y'],
+        ['ffmpeg', '-i', dl, '-f', 's16le', '-ac', '1', '-ar', '48000', song, '-y', '-f', 'rawvideo', '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:480', video, '-y'],
         stdin=None,
         stdout=None,
         stderr=None,
@@ -63,7 +63,7 @@ async def leave_call(chat_id: int):
 
 def youtube(url: str):
     try:
-        params = {"format": "best[height=?360]/best", "noplaylist": True}
+        params = {"format": "best[height=?480]/best", "noplaylist": True}
         yt = YoutubeDL(params)
         info = yt.extract_info(url, download=False)
         return info['url'], info['title'], info['duration']
@@ -81,11 +81,11 @@ async def startvideo(client, m: Message):
             [
                 [
                     InlineKeyboardButton(
-                        text=" ɢʀᴏᴜᴘ",
-                        url="https://t.me/YhurimusicbotGC"),
+                        text="✨ ɢʀᴏᴜᴘ",
+                        url="https://t.me/VeezSupportGroup"),
                     InlineKeyboardButton(
-                        text=" ᴄʜᴀɴɴᴇʟ",
-                        url="https://t.me/Yhurimusicchannel")
+                        text="🌻 ᴄʜᴀɴɴᴇʟ",
+                        url="https://t.me/levinachannel")
                 ]
             ]
         )
@@ -93,7 +93,7 @@ async def startvideo(client, m: Message):
     replied = m.reply_to_message
     if not replied:
         if len(m.command) < 2:
-            await m.reply(" **reply to video or provide youtube/live video url to start video streaming**")
+            await m.reply("💡 **reply to video or provide youtube/live video url to start video streaming**")
         else:
             livelink = m.text.split(None, 1)[1]
             chat_id = m.chat.id
@@ -126,23 +126,23 @@ async def startvideo(client, m: Message):
                     InputAudioStream(
                         audio_file,
                         AudioParameters(
-                            bitrate=44100,
+                            bitrate=48000,
                         ),
                     ),
                     InputVideoStream(
                         video_file,
                         VideoParameters(
-                            width=640,
-                            height=360,
+                            width=854,
+                            height=480,
                             frame_rate=20,
                         ),
                     ),
                     stream_type=StreamType().local_stream,
                 )
                 await m.reply_photo(
-                    photo="https://telegra.ph/file/c5e60822153157fa082fa.jpg",
+                    photo="https://telegra.ph/file/0faaa780ae861fb780814.png",
                     reply_markup=keyboard,
-                    caption=f" **video streaming started!**\n\n🏷 **Name:** {title}\n⏱ **Duration:** `{convert_seconds(duration)} m`\n\n» **join to video chat on the top to watch the video.**")
+                    caption=f"💡 **video streaming started!**\n\n🏷 **Name:** {title}\n⏱ **Duration:** `{convert_seconds(duration)} m`\n\n» **join to video chat on the top to watch the video.**")
                 return await msg.delete()
                 await idle()
             except Exception as e:
@@ -153,7 +153,7 @@ async def startvideo(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = m.chat.id
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv360p -vf scale=426:240 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 48000 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -165,29 +165,29 @@ async def startvideo(client, m: Message):
                 InputAudioStream(
                     audio_file,
                     AudioParameters(
-                        bitrate=44100,
+                        bitrate=48000,
                     ),
                 ),
                 InputVideoStream(
                     video_file,
                     VideoParameters(
-                        width=426,
-                        height=240,
+                        width=640,
+                        height=360,
                         frame_rate=20,
                     ),
                 ),
                 stream_type=StreamType().local_stream,
             )
             await m.reply_photo(
-                photo="https://telegra.ph/file/c5e60822153157fa082fa.jpg",
+                photo="https://telegra.ph/file/bca4f149e798092846230.png",
                 reply_markup=keyboard,
-                caption=f" **video streaming started !**\n\n» **join to video chat on the top to watch the video.**")
+                caption=f"💡 **video streaming started !**\n\n» **join to video chat on the top to watch the video.**")
             return await msg.delete()
         except Exception as e:
             await msg.edit(f"🚫 **error** | `{e}`")
             await idle()
     else:
-        await m.reply(" please reply to video or video file to stream")
+        await m.reply("💭 please reply to video or video file to stream")
 
 
 @Client.on_message(command(["vstop", f"vstop@{Veez.BOT_USERNAME}"]) & filters.group & ~filters.edited)
@@ -221,7 +221,7 @@ async def chstream(client, m: Message):
     replied = m.reply_to_message
     if not replied:
         if len(m.command) < 2:
-            await m.reply(" **reply to video or provide youtube/live video url to start video streaming**")
+            await m.reply("💡 **reply to video or provide youtube/live video url to start video streaming**")
         else:
             livelink = m.text.split(None, 1)[1]
             chat_id = Veez.CHANNEL
@@ -254,20 +254,20 @@ async def chstream(client, m: Message):
                     InputAudioStream(
                         audio_file,
                         AudioParameters(
-                            bitrate=44100,
+                            bitrate=48000,
                         ),
                     ),
                     InputVideoStream(
                         video_file,
                         VideoParameters(
-                            width=640,
-                            height=360,
+                            width=854,
+                            height=480,
                             frame_rate=20,
                         ),
                     ),
                     stream_type=StreamType().local_stream,
                 )
-                await msg.edit(" **video streaming channel started !**")
+                await msg.edit("💡 **video streaming channel started !**")
                 await idle()
             except Exception as e:
                 await msg.edit(f"🚫 **error** - `{e}`")
@@ -277,7 +277,7 @@ async def chstream(client, m: Message):
         video = await client.download_media(m.reply_to_message)
         chat_id = Veez.CHANNEL
         await msg.edit("🔁 **preparing video...**")
-        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 44100 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv360p -vf scale=426:240 'video{chat_id}.raw' -y")
+        os.system(f"ffmpeg -i '{video}' -f s16le -ac 1 -ar 48000 'audio{chat_id}.raw' -y -f rawvideo -r 20 -pix_fmt yuv420p -vf scale=640:360 'video{chat_id}.raw' -y")
         try:
             audio_file = f'audio{chat_id}.raw'
             video_file = f'video{chat_id}.raw'
@@ -289,20 +289,20 @@ async def chstream(client, m: Message):
                 InputAudioStream(
                     audio_file,
                     AudioParameters(
-                        bitrate=44100,
+                        bitrate=48000,
                     ),
                 ),
                 InputVideoStream(
                     video_file,
                     VideoParameters(
-                        width=426,
-                        height=240,
+                        width=640,
+                        height=360,
                         frame_rate=20,
                     ),
                 ),
                 stream_type=StreamType().local_stream,
             )
-            await msg.edit(" **video streaming channel started !**")
+            await msg.edit("💡 **video streaming channel started !**")
         except Exception as e:
             await msg.edit(f"🚫 **error** - `{e}`")
             await idle()
